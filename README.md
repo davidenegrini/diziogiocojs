@@ -1,2 +1,2 @@
-# diziogiocojs
-DizioGioco (prove implementazione in HTML/JavaScript)
+# DizioGiocoJS
+DizioGioco: prove implementazione in HTML/JavaScript
