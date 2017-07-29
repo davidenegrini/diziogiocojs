@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DiziogiocoJS</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+    	<script>
+			//set global variables
+			var choosedictio;
+			var choosediff;
+			var aaaa;
+			var zzzz;
+			var wordfind;
+			var dictionary;
+			var minchars=2;
+		</script>
+        <div id="settings" style="">
+        	Dizionario:
+            <select id="fchoosedictio" name="fchoosedictio">
+            	<option value="it">Italiano</option>
+            </select>
+            <br>
+        	Difficolt&agrave;:
+            <select id="fchoosediff" name="fchoosediff">
+            	<option value="A">A (minima)</option>
+            	<option value="B">B</option>
+            	<option value="C">C</option>
+            	<option value="D">D</option>
+            	<option value="E">E</option>
+            	<option value="F">F</option>
+            	<option value="G">G</option>
+            	<option value="H">H</option>
+            	<option value="I">I</option>
+            	<option value="L">L (massima)</option>
+            </select>
+            <br>
+            <input type="button" value="Inizia!" onClick="startplay()">
+        </div>
+        <script>
+			//click button startplay
+			function startplay() {
+				//set variables to zero
+				choosedictio="";
+				choosediff="";
+				aaaa="a";
+				zzzz="zzz";
+				wordfind="";
+				dictionary=[];
+				dictionary["all"]=[];
+				dictionary["A"]=[];
+				dictionary["B"]=[];
+				dictionary["C"]=[];
+				dictionary["D"]=[];
+				dictionary["E"]=[];
+				dictionary["F"]=[];
+				dictionary["G"]=[];
+				dictionary["H"]=[];
+				dictionary["I"]=[];
+				dictionary["L"]=[];
+				//set standard start notice
+				$("#notice").html("Inizia ad inserire parole!");
+				//change page view
+				$("#settings").hide();
+				$("#loading").show();
+				//settings set
+				choosedictio=$("#fchoosedictio").val();
+				choosediff=$("#fchoosediff").val();
+				//get database and split into diff
+				$.getJSON(choosedictio+".json", function(jsondb) {
+					$(jsondb).each(function(index) {
+						dictionary["all"].push(this["word"]);
+						dictionary[this["diff"]].push(this["word"]);
+					});
+					//generate word to find (and check minchars)
+					do {
+						wordfind=dictionary[choosediff][Math.floor(Math.random() * Object.keys(dictionary[choosediff]).length)];
+					} while(wordfind.length < minchars);
+					//change page view
+					$("#loading").hide();
+					$("#game").show();
+					//first game updatefields
+					updatefields();
+					console.log(wordfind);
+				});
+			}
+        </script>
+        <div id="loading" style="display:none;">
+        	Prego attendere il caricamento...
+        </div>
+        <div id="game" style="display:none;">
+        	<span id="faaaa"></span>
+            <br>
+            <input type="text" id="newword" name="newword"> <input type="button" value="Vai" onClick="checknewword()">
+            <br>
+            <span id="fzzzz"></span>
+            <br>
+            <span id="notice">...</span>
+        </div>
+        <script>
+			//clean and set new limits
+			function updatefields() {
+				$("#faaaa").html(aaaa);
+				$("#fzzzz").html(zzzz);
+				$("#newword").val("");
+				$("#newword").focus();
+			}
+			//check what's written in newword
+			function checknewword() {
+				//cleanup user input
+				var inserted=$("#newword").val().toLowerCase();
+				inserted=inserted.replace(/[^a-z]+/g, '');
+				//check minchars
+				if ($("#newword").val().length < minchars) {
+					$("#notice").html("Parola troppo corta");
+				} else {
+					//check if word is in dictionary
+					if (dictionary["all"].includes(inserted)) {
+						//string comparisons
+						if ((aaaa.localeCompare(inserted) == -1) && (inserted.localeCompare(zzzz) == -1)) {
+							if ((aaaa.localeCompare(inserted) == -1) && (inserted.localeCompare(wordfind) == -1)) {
+								//found new top limit
+								aaaa=inserted;
+								$("#notice").html("Trovato nuovo limite (superiore)");
+							} else {
+								if ((wordfind.localeCompare(inserted) == -1) && (inserted.localeCompare(zzzz) == -1)) {
+									//found new bottom limit
+									zzzz=inserted;
+									$("#notice").html("Trovato nuovo limite (inferiore)");
+								} else {
+									if (wordfind.localeCompare(inserted) == 0) {
+										//found word
+										$("#notice").html("Parola &quot;"+wordfind+"&quot; trovata!");
+										$("#endword").html(wordfind.toUpperCase());
+										$("#game").hide();
+										$("#won").show();
+									} else {
+										//that's not technically possible
+									}
+								}
+							}
+						} else {
+							//not in range
+							$("#notice").html("Parola fuori dai limiti attualmente impostati");
+						}
+					} else {
+						//not in dictionary
+						$("#notice").html("Parola non presente nel dizionario");
+					}
+				}
+				//updatefields
+				updatefields();
+			}
+			//start function also on hitting enter
+			$("#newword").on('keyup', function (e) {
+				if (e.keyCode == 13) {
+					checknewword();
+				}
+			});
+		</script>
+        <div id="won" style="display:none;">
+        	Hai trovato la parola!
+            <br>
+            <span id="endword">...</span>
+            <br>
+            <input type="button" value="Gioca di nuovo" onClick="restartgame()">
+        </div>
+        <script>
+			function restartgame() {
+				$("#won").hide();
+				$("#settings").show();
+			}
+		</script>
+    </body>
+</html>
