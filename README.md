@@ -21,9 +21,10 @@ Questo fino a quando non verrà inserita la parola da trovare, momento in cui il
  - Non ci sono parole con trattini, accenti (scrivere la parola togliendoli), punti o altri segni.
  - Presenti solo lettere dalla "a" alla "z".
  - I verbi sono considerati solo all'infinito.
+ - Classificazione difficoltà basata su frequenza di uso nella lingua secondo varie fonti.
 
 ## Cose da fare
 
-- Suggerimenti (dare le ultime due lettere della parola, dare il numero di lettere)
-- Autocompletamento iniziali parola
-- Condivisione sui social
+- Suggerimenti (ultime due lettere della parola, numero di lettere).
+- Autocompletamento iniziali parola.
+- Condivisione sui social.
