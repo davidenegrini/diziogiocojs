@@ -24,12 +24,6 @@ Questo fino a quando non verrà inserita la parola da trovare, momento in cui il
 
 ## Cose da fare
 
-Tratte dalle funzionalità già presenti sulla app.
-
-- Possibilità di abbandonare la partita
-- Suggerimenti
-	- Vengono date le ultime due lettere della parola
-	- Viene dato il numero di lettere
-- Possibilità di segnalare parole
+- Suggerimenti (dare le ultime due lettere della parola, dare il numero di lettere)
 - Autocompletamento iniziali parola
 - Condivisione sui social
