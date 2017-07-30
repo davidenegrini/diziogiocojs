@@ -24,8 +24,15 @@
                 <article id="startpanel" class="panel">
                     <h1>DizioGiocoJS</h1>
                     <p><br><input type="button" value="Inizia!" onClick="gotosettings()"></p>
-                    <p>Email: <a href="mailto:mail@spiritoftheforest.org" style="color:#777;">mail@spiritoftheforest.org</a></p>
-                    <p><em>Attenzione: ad ogni partita viene attualmente ri-scaricato tutto il dizionario, che pesa circa 5 MB</em></p>
+                    <p>
+                    	<i class="fa fa-envelope-o"></i>
+                        Per contatti o segnalare parole scrivi a
+                        <a href="mailto:mail@spiritoftheforest.org" style="color:#777;">mail@spiritoftheforest.org</a>
+                    	<br>
+                        <i class="fa fa-github"></i>
+                        Per maggiori informazioni vai al
+                        <a href="https://github.com/davidenegrini/diziogiocojs" target="_blank" style="color:#777;">progetto su GitHub</a>
+                    </p>
                 </article>
 				<script>
                     //set global variables
@@ -45,26 +52,31 @@
 					}
                 </script>
                 <article id="settings" class="panel" style="display:none;">
-                    Dizionario:
-                    <select id="fchoosedictio" name="fchoosedictio">
-                        <option value="it">Italiano</option>
-                    </select>
-                    <br>
-                    Difficolt&agrave;:
-                    <select id="fchoosediff" name="fchoosediff">
-                        <option value="A">A (minima)</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                        <option value="I">I</option>
-                        <option value="L">L (massima)</option>
-                    </select>
-                    <br><br>
-                    <input type="button" value="Inizia!" onClick="startplay()">
+                    <p>
+                        Dizionario:
+                        <select id="fchoosedictio" name="fchoosedictio">
+                            <option value="it">Italiano (2,5 MB)</option>
+                        </select>
+                    	<br>
+                        Difficolt&agrave;:
+                        <select id="fchoosediff" name="fchoosediff">
+                            <option value="A">A (minima)</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                            <option value="L">L (massima)</option>
+                        </select>
+                        <br><br>
+                        <em><strong>Attenzione!</strong> Ad ogni partita viene attualmente ri-scaricato tutto il dizionario</em>
+                    </p>
+                    <p>
+                    	<input type="button" value="Inizia!" onClick="startplay()">
+                    </p>
                 </article>
 				<script>
                     //click button startplay
@@ -99,8 +111,8 @@
                         //get database and split into diff
                         $.getJSON(choosedictio+".json", function(jsondb) {
                             $(jsondb).each(function(index) {
-                                dictionary["all"].push(this["word"]);
-                                dictionary[this["diff"]].push(this["word"]);
+                                dictionary["all"].push(this["w"]);
+                                dictionary[this["d"]].push(this["w"]);
                             });
                             //generate word to find (and check minchars)
                             do {
@@ -129,6 +141,8 @@
                     <br>
                     <br>
                     <em><span id="notice">...</span></em>
+                    <br><br>
+                    <em><a href="#" onClick="exitgame()" style="color:#777;">Abbandona partita</a></em>
                 </article>
 				<script>
                     //clean and set new limits
@@ -165,6 +179,7 @@
                                                 //found word
                                                 $("#notice").html("Parola &quot;"+wordfind+"&quot; trovata!");
                                                 $("#endword").html(wordfind.toUpperCase());
+												$("#wontitle").html("Hai trovato la parola!");
                                                 $("#game").hide();
 												$("#navgame").removeClass("active");
                                                 $("#won").show();
@@ -192,9 +207,19 @@
                             checknewword();
                         }
                     });
+					//game early screen out
+					function exitgame() {
+						$("#notice").html("Partita abbandonata!");
+						$("#endword").html(wordfind.toUpperCase());
+						$("#wontitle").html("Hai abbandonato la partita...");
+						$("#game").hide();
+						$("#navgame").removeClass("active");
+						$("#won").show();
+						$("#navwon").addClass("active");
+					}
                 </script>
                 <article id="won" class="panel" style="display:none; text-align:center;">
-                    <h2>Hai trovato la parola!</h2>
+                    <h2 id="wontitle">...</h2>
                     <br>
                     <em><strong><span id="endword">...</span></strong></em>
                     <br>
