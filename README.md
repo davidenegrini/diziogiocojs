@@ -23,7 +23,7 @@ Questo fino a quando non verrà inserita la parola da trovare, momento in cui il
  - I verbi sono considerati solo all'infinito.
  - Classificazione difficoltà basata su frequenza di uso nella lingua secondo varie fonti.
 
-## Cose da fare
+## Eventuali cose da fare
 
 - Suggerimenti (ultime due lettere della parola, numero di lettere).
 - Autocompletamento iniziali parola.
