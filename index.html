@@ -41,6 +41,7 @@
                     var aaaa;
                     var zzzz;
                     var wordfind;
+					var tries;
                     var dictionary;
                     var minchars=2;
 					//gotosettings page
@@ -72,7 +73,7 @@
                             <option value="L">L (massima)</option>
                         </select>
                         <br><br>
-                        <em><strong>Attenzione!</strong> Ad ogni partita viene attualmente ri-scaricato tutto il dizionario</em>
+                        <em><i class="fa fa-exclamation-triangle"></i> <strong>Attenzione!</strong> Ad ogni partita viene attualmente ri-scaricato tutto il dizionario</em>
                     </p>
                     <p>
                     	<input type="button" value="Inizia!" onClick="startplay()">
@@ -87,6 +88,7 @@
                         aaaa="a";
                         zzzz="zzz";
                         wordfind="";
+						tries=0;
                         dictionary=[];
                         dictionary["all"]=[];
                         dictionary["A"]=[];
@@ -125,6 +127,7 @@
 							$("#navgame").addClass("active");
                             //first game updatefields
                             updatefields();
+							//print in console the word, only for debug purposes
                             console.log(wordfind);
                         });
                     }
@@ -133,11 +136,11 @@
                 	<em>Prego attendere il caricamento...</em>
                 </article>
                 <article id="game" class="panel" style="display:none; text-align:center;">
-                    <span id="faaaa"></span>
+                    <strong><span id="faaaa"></span></strong>
                     <br>
                     <input type="text" id="newword" name="newword"><!-- <input type="button" value="Vai" onClick="checknewword()"> -->
                     <br>
-                    <span id="fzzzz"></span>
+                    <strong><span id="fzzzz"></span></strong>
                     <br>
                     <br>
                     <em><span id="notice">...</span></em>
@@ -147,8 +150,8 @@
 				<script>
                     //clean and set new limits
                     function updatefields() {
-                        $("#faaaa").html(aaaa);
-                        $("#fzzzz").html(zzzz);
+                        $("#faaaa").html(aaaa.toUpperCase());
+                        $("#fzzzz").html(zzzz.toUpperCase());
                         $("#newword").val("");
                         $("#newword").focus();
                     }
@@ -167,11 +170,13 @@
                                 if ((aaaa.localeCompare(inserted) == -1) && (inserted.localeCompare(zzzz) == -1)) {
                                     if ((aaaa.localeCompare(inserted) == -1) && (inserted.localeCompare(wordfind) == -1)) {
                                         //found new top limit
+										tries++;
                                         aaaa=inserted;
                                         $("#notice").html("Trovato nuovo limite (superiore)");
                                     } else {
                                         if ((wordfind.localeCompare(inserted) == -1) && (inserted.localeCompare(zzzz) == -1)) {
                                             //found new bottom limit
+											tries++;
                                             zzzz=inserted;
                                             $("#notice").html("Trovato nuovo limite (inferiore)");
                                         } else {
@@ -179,18 +184,20 @@
                                                 //found word
                                                 $("#notice").html("Parola &quot;"+wordfind+"&quot; trovata!");
                                                 $("#endword").html(wordfind.toUpperCase());
+                                                $("#endtries").html(tries.toString());
 												$("#wontitle").html("Hai trovato la parola!");
                                                 $("#game").hide();
 												$("#navgame").removeClass("active");
                                                 $("#won").show();
 												$("#navwon").addClass("active");
                                             } else {
-                                                //that's not technically possible
+                                                //that's not theorically possible to be in this condition
                                             }
                                         }
                                     }
                                 } else {
                                     //not in range
+									tries++;
                                     $("#notice").html("Parola fuori dai limiti attualmente impostati");
                                 }
                             } else {
@@ -211,6 +218,7 @@
 					function exitgame() {
 						$("#notice").html("Partita abbandonata!");
 						$("#endword").html(wordfind.toUpperCase());
+						$("#endtries").html(tries.toString());
 						$("#wontitle").html("Hai abbandonato la partita...");
 						$("#game").hide();
 						$("#navgame").removeClass("active");
@@ -221,7 +229,9 @@
                 <article id="won" class="panel" style="display:none; text-align:center;">
                     <h2 id="wontitle">...</h2>
                     <br>
-                    <em><strong><span id="endword">...</span></strong></em>
+                    <h3><span id="endword">...</span></h3>
+                    <br>
+                    <em>Con <strong><span id="endtries">...</span></strong> tentativi intermedi</em>
                     <br>
                     <br>
                     <input type="button" value="Gioca di nuovo" onClick="restartgame()">
