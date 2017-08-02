@@ -8,6 +8,8 @@ Attualmente sviluppata completamente in JavaScript con jQuery.
 
 Accedi al gioco: **https://davidenegrini.github.io/diziogiocojs/** (oppure ***http://diziogioco.ga***)
 
+*Testo dell'email per annunciare la nuova versione: http://mailchi.mp/d02109b66817/diziogioco-tornato*
+
 ## Come giocare
 
 Più facile a farsi che a dirsi: il gioco consiste nel trovare la parola, tratta casualmente da un dizionario italiano, restringendo, man mano si inseriscono nuove parole, il campo delle possibilità.
