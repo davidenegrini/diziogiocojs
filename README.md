@@ -2,7 +2,7 @@
 
 > Metti in gioco le tue conoscenze delle parole italiane!
 
-DizioGioco è una app nata nel 2012 per Windows Phone 7 e dal 2013 non è più aggiornata. Ora è diventata una semplice pagina su GitHub.io, che permette di giocarci senza grandi pretese.
+DizioGioco è una app nata nel 2012 per Windows Phone 7 e dal 2013 non è più stata aggiornata: ora è diventata una semplice pagina su GitHub.io, che permette di giocarci senza grandi pretese.
 
 Attualmente sviluppata completamente in JavaScript con jQuery.
 
