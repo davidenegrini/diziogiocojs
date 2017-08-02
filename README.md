@@ -1,14 +1,14 @@
-# DizioGiocoJS
+# DizioGiocoJS (DizioGioco)
 
 > Metti in gioco le tue conoscenze delle parole italiane!
 
-DizioGioco è una app nata nel 2012 per Windows Phone. Ora è una semplice pagina su GitHub.io che permette di giocarci senza grandi pretese.
+DizioGioco è una app nata nel 2012 per Windows Phone 7 e dal 2013 non è più aggiornata. Ora è diventata una semplice pagina su GitHub.io, che permette di giocarci senza grandi pretese.
 
 Attualmente sviluppata completamente in JavaScript con jQuery.
 
-Accedi al gioco: **https://davidenegrini.github.io/diziogiocojs/**
+Accedi al gioco: **https://davidenegrini.github.io/diziogiocojs/** (oppure ***http://diziogioco.ga***)
 
-## Dinamica di gioco
+## Come giocare
 
 Più facile a farsi che a dirsi: il gioco consiste nel trovare la parola, tratta casualmente da un dizionario italiano, restringendo, man mano si inseriscono nuove parole, il campo delle possibilità.
 
@@ -16,15 +16,6 @@ Lo scopo è indovinare una specifica parola dal dizionario: si inizia inserendo 
 
 Questo fino a quando non verrà inserita la parola da trovare, momento in cui il gioco finisce perché... hai vinto la partita!
 
-## Caratteristiche del dizionario italiano integrato
-
- - Non ci sono parole con trattini, accenti (scrivere la parola togliendoli), punti o altri segni.
- - Presenti solo lettere dalla "a" alla "z".
- - I verbi sono considerati solo all'infinito.
- - Classificazione difficoltà basata su frequenza di uso nella lingua secondo varie fonti.
-
-## Eventuali cose da fare
-
-- Suggerimenti (ultime due lettere della parola, numero di lettere).
-- Autocompletamento iniziali parola.
-- Condivisione sui social.
+ - La classificazione della difficoltà si basa su teoriche frequenze di uso nella lingua.
+ - I verbi sono solitamente considerati solo all'infinito.
+ - Nel dizionario interno sono presenti solo le lettere dalla "a" alla "z" senza accenti, segni diacritici, trattini, punti o altro.

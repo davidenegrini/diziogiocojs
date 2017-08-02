@@ -11,6 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel-viewport.min.js"></script>
         <script src="gfx/main.js"></script>
+        <script src="gfx/removeDiacritics.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -33,9 +34,9 @@
                         Per maggiori informazioni vai al
                         <a href="https://github.com/davidenegrini/diziogiocojs" target="_blank" style="color:#777;">progetto su GitHub</a>
                     	<br>
-                        <!--<i class="fa fa-paypal"></i>
+                        <i class="fa fa-paypal"></i>
                         Per una donazione vai su
-                        <a href="https://www.paypal.me/davidenegrini" target="_blank" style="color:#777;">PayPal</a>-->
+                        <a href="https://www.paypal.me/davidenegrini" target="_blank" style="color:#777;">PayPal</a>
                     </p>
                 </article>
 				<script>
@@ -141,7 +142,7 @@
                 <article id="game" class="panel" style="display:none; text-align:center;">
                     <strong><span id="faaaa"></span></strong>
                     <br>
-                    <input type="text" id="newword" name="newword"><!-- <input type="button" value="Vai" onClick="checknewword()"> -->
+                    <input type="text" id="newword" name="newword">
                     <br>
                     <strong><span id="fzzzz"></span></strong>
                     <br>
@@ -158,11 +159,17 @@
                         $("#newword").val("");
                         $("#newword").focus();
                     }
+					//clean user input (need removeDiacritics library)
+					function cleanuserinput(instr) {
+						var outstr=instr.toLowerCase();
+						outstr=removeDiacritics(outstr);
+                        outstr=outstr.replace(/[^a-z]+/g, '');
+						return outstr;
+					}
                     //check what's written in newword
                     function checknewword() {
-                        //cleanup user input
-                        var inserted=$("#newword").val().toLowerCase();
-                        inserted=inserted.replace(/[^a-z]+/g, '');
+                        //clean user input
+                        var inserted=cleanuserinput($("#newword").val());
                         //check minchars
                         if ($("#newword").val().length < minchars) {
                             $("#notice").html("Parola troppo corta");
@@ -186,7 +193,7 @@
                                             if (wordfind.localeCompare(inserted) == 0) {
                                                 //found word
                                                 $("#notice").html("Parola &quot;"+wordfind+"&quot; trovata!");
-                                                $("#endword").html(wordfind.toUpperCase());
+                                                $("#endword").html(endwordmenaninglink(wordfind));
                                                 $("#endtries").html(tries.toString());
 												$("#wontitle").html("Hai trovato la parola!");
                                                 $("#game").hide();
@@ -220,13 +227,23 @@
 					//game early screen out
 					function exitgame() {
 						$("#notice").html("Partita abbandonata!");
-						$("#endword").html(wordfind.toUpperCase());
+						$("#endword").html(endwordmenaninglink(wordfind));
 						$("#endtries").html(tries.toString());
 						$("#wontitle").html("Hai abbandonato la partita...");
 						$("#game").hide();
 						$("#navgame").removeClass("active");
 						$("#won").show();
 						$("#navwon").addClass("active");
+					}
+					function endwordmenaninglink(word) {
+						switch (choosedictio) {
+							case "it":
+								return "<a href=\"http://www.treccani.it/vocabolario/ricerca/"+word+"\" target=\"_blank\" style=\"color:#000;\">"+word.toUpperCase()+"</a>"
+								break;
+							default:
+								return word.toUpperCase();
+								break;
+						}
 					}
                 </script>
                 <article id="won" class="panel" style="display:none; text-align:center;">
