@@ -6,9 +6,7 @@ DizioGioco è una app nata nel 2012 per Windows Phone 7 e dal 2013 non è più s
 
 Attualmente sviluppata completamente in JavaScript con jQuery.
 
-Accedi al gioco: **https://davidenegrini.github.io/diziogiocojs/** (oppure ***http://diziogioco.ga***)
-
-*Testo dell'email per annunciare la nuova versione: http://mailchi.mp/d02109b66817/diziogioco-tornato*
+Accedi al gioco: **https://davidenegrini.github.io/diziogiocojs/**
 
 ## Come giocare
 
