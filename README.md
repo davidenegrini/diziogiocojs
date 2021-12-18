@@ -2,13 +2,13 @@
 
 > Metti in gioco le tue conoscenze delle parole italiane!
 
-**LA LICENZA GNU GPL ( https://github.com/davidenegrini/diziogiocojs/blob/master/LICENSE ) COPRE SIA IL CODICE SORGENTE CHE L'IDEA DEL GIOCO ED IL SUO MECCANISMO.**
+**LA LICENZA GNU GPL ( https://github.com/davidenegrini/diziogiocojs/blob/master/LICENSE ) COPRE SIA IL CODICE SORGENTE CHE L'IDEA DEL GIOCO ED IL SUO MECCANISMO**
 
-**Se siete interessati a sviluppare un gioco con questa idea di fondo potete scrivere via email a mail@spiritoftheforest.org e sarò ben felice di iniziare una collaborazione con conseguente modifica della licenza data.**
+**Se siete interessati a sviluppare un gioco con questa idea di fondo potete scrivere via email a davidenegrini[at]outlook[dot]com**
 
-DizioGioco è una app nata nel 2012 per Windows Phone 7 e dal 2013 non è più stata aggiornata: ora è diventata una semplice pagina su GitHub.io, che permette di giocarci senza grandi pretese.
+DizioGioco è una app nata nel 2012 per Windows Phone 7 e dal 2013 non è più stata aggiornata: ora è diventata un semplice repository su GitHub.
 
-Attualmente sviluppata completamente in JavaScript con jQuery.
+Attualmente sviluppata in JavaScript con jQuery.
 
 Accedi al gioco: **https://davidenegrini.github.io/diziogiocojs/**
 
